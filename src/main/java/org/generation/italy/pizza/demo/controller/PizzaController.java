@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.validation.Valid;
 
 //indichiamo che qesta classe ci servirà da controller
 @Controller
@@ -49,4 +53,19 @@ public class PizzaController {
 		}
 		
 		//CREATE PIZZA
+		@GetMapping("/pizza/create")
+		public String createPizza(Model model) {
+			
+			Pizza pizza = new Pizza();
+			model.addAttribute("pizza", pizza);
+			
+			return "pizzaCRUD/create";
+		}
+		@PostMapping("/pizza/create")
+		public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
+			
+			pizzaService.save(pizza);
+			
+			return "redirect:/";
+		}
 }

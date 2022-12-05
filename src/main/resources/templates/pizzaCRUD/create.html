@@ -10,7 +10,7 @@
 		<header th:insert="frag :: header-nav"></header>
 		
 		<main>
-			<form action="">
+			<form method="POST" action="/pizza/create" th:object="${pizza}">
 				<label>Nome pizza</label>
 				<input type="text" name="name" th:field="*{name}">
 				<label>Descrizione pizza</label>
