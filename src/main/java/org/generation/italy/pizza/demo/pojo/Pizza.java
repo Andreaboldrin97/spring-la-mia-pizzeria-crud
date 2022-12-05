@@ -23,7 +23,7 @@ public class Pizza {
 	private int id;
 	
 	@NotNull
-	@NotEmpty(message = "il titolo deve contenere qualcosa")
+	@NotEmpty(message = "il nome deve contenere qualcosa")
 	@Column(length = 50)
 	private String name;
 	
@@ -33,7 +33,6 @@ public class Pizza {
 	@Lob
 	private String description;
 	
-	@NotNull(message="il prezzo non può essere nullo")
 	@Column
 	@Min(value=0)
 	private int price;

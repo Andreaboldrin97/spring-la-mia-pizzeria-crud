@@ -1,14 +1,26 @@
 package org.generation.italy.pizza.demo.controller;
 
+import java.util.List;
+
+import org.generation.italy.pizza.demo.pojo.Pizza;
+import org.generation.italy.pizza.demo.service.PizzaService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+//indichiamo che qesta classe ci servirà da controller
 @Controller
 public class PizzaController {
+	
+	//indichiamo la dipendenza da iniettare
+	@Autowired
+	private PizzaService pizzaService;
 
 	//GET PATH without parameters
 	
+		//HOME
 		//Indichiamo a quale path fa riferimento questo metodo
 		@RequestMapping("/")
 		//indichiamo il metodo publico che ritornerà una Stringa
@@ -22,6 +34,19 @@ public class PizzaController {
 			model.addAttribute("text", text);
 			
 			//ritorniamo il file assocciato al nome "home"
-			return "index";
+			return "home";
 		}
+		
+		//INDEX PIZZA
+		@GetMapping("/allPizzas")
+		public String getPizze(Model model) {
+			//assegnamo ad un lista i record del db
+			List<Pizza> allPizzas = pizzaService.findAll();
+			
+			model.addAttribute("allPizzas", allPizzas);
+			
+			return "pizzaCRUD/index";
+		}
+		
+		//CREATE PIZZA
 }
