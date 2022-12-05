@@ -111,6 +111,6 @@ public class PizzaController {
 			pizzaService.delete(pizza);
 			
 			//a quale view ritorna
-			return "redirect:/allPizzas";
+			return  "redirect:/allPizzas";
 		}
 }
