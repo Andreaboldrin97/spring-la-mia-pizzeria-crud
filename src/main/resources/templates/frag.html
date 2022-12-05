@@ -32,12 +32,19 @@
 		
 		<!-- FORM CRUD FRAGMENT -->
 		<th:block th:fragment="form-crud">
-			<label>Nome pizza</label>
-			<input type="text" name="name" th:field="*{name}">
-			<label>Descrizione pizza</label>
-			<input type="text" name="description" th:field="*{description}">
-			<label>Prezzo pizza</label>
-			<input type="number" name="price" th:field="*{price}">
+			<div class="mb-3">
+				<label class="form-label">Nome pizza</label>
+				<input class="form-control" type="text" name="name" th:field="*{name}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Descrizione pizza</label>
+				<input class="form-control" type="text" name="description" th:field="*{description}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Prezzo pizza</label>
+				<input class="form-control" type="number" name="price" th:field="*{price}">
+			</div>
+			
 			<input type="submit" value="save" class="btn btn-success">
 		</th:block>
 	</body>

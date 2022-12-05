@@ -44,6 +44,7 @@ public class PizzaController {
 		}
 		
 		//INDEX PIZZA
+		//Indichiamo a quale path fa riferimento questo metodo
 		@GetMapping("/allPizzas")
 		public String getPizze(Model model) {
 			//assegnamo ad un lista i record del db
@@ -51,53 +52,65 @@ public class PizzaController {
 			
 			model.addAttribute("allPizzas", allPizzas);
 			
+			//a quale view fa riferimento
 			return "pizzaCRUD/index";
 		}
 		
 		//CREATE PIZZA
+		//Indichiamo a quale path fa riferimento questo metodo
 		@GetMapping("/pizza/create")
 		public String createPizza(Model model) {
 			
 			Pizza pizza = new Pizza();
 			model.addAttribute("pizza", pizza);
 			
+			//a quale view fa riferimento
 			return "pizzaCRUD/create";
 		}
 		@PostMapping("/pizza/create")
 		public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
 			
+			//metodo per salvare un record
 			pizzaService.save(pizza);
 			
+			//a quale view ritorna
 			return "redirect:/";
 		}
 		
 		//CREATE PIZZA
+		//Indichiamo a quale path fa riferimento questo metodo
 		@GetMapping("/pizza/edit/{id}")
 		public String editPizza(@PathVariable("id") int id, Model model) {
-					
+			
+			// selezioniamo il record con quell'id
 			Optional<Pizza> optPizza = pizzaService.findPizzaByID(id);
 			Pizza pizza  = optPizza.get();
 			model.addAttribute("pizza", pizza);
 			
+			//a quale view fa riferimento
 			return "pizzaCRUD/update";
 		}
 		@PostMapping("/pizza/store")
 		public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
-					
+			//metodo per salvare un record
 			pizzaService.save(pizza);
-					
+			
+			//a quale view ritorna
 			return "redirect:/";
 		}
 		
 		//DELETE PIZZA 
+		//Indichiamo a quale path fa riferimento questo metodo
 		@GetMapping("/pizza/delete/{id}")
 		public String deletePizza(@PathVariable("id") int id) {
 			
+			// selezioniamo il record con quell'id
 			Optional<Pizza> optPizza = pizzaService.findPizzaByID(id);
 			Pizza pizza  = optPizza.get();
-			
+			//metodo per eliminare un record
 			pizzaService.delete(pizza);
 			
+			//a quale view ritorna
 			return "redirect:/";
 		}
 }
