@@ -29,5 +29,16 @@
 			  </div>
 			</nav>
 		</header>
+		
+		<!-- FORM CRUD FRAGMENT -->
+		<th:block th:fragment="form-crud">
+			<label>Nome pizza</label>
+			<input type="text" name="name" th:field="*{name}">
+			<label>Descrizione pizza</label>
+			<input type="text" name="description" th:field="*{description}">
+			<label>Prezzo pizza</label>
+			<input type="number" name="price" th:field="*{price}">
+			<input type="submit" value="save" class="btn btn-success">
+		</th:block>
 	</body>
 </html>
