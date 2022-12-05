@@ -28,16 +28,12 @@
 				  <tbody>
 				    <tr th:each=" pizza : ${allPizzas}" th:object="${pizza}" th:if="${allPizzas.size() > 0}">
 				      <th scope="row" th:text="*{id}"></th>
-				      <td>
-				      	<a th:text="*{name}" th:href="@{/pizza/edit/{id} (id=*{id})}"></a>
-				      </td>
+				      <td th:text="*{name}"></td>
 				      <td th:text="*{description}"></td>
 				      <td th:text="*{price}"></td>
 				      <td>
-				      	<a class="btn btn-primary">Edit</a>
-				      </td>
-					  <td>
-					  	<a class="btn btn-danger">Delete</a>
+				      	<a class="btn btn-primary" th:href="@{/pizza/edit/{id} (id=*{id})}">Edit</a>
+					  	<a class="btn btn-danger" th:href="@{/pizza/delete/{id} (id=*{id})}" >Delete</a>
 					  </td>
 				    </tr>
 				  </tbody>
