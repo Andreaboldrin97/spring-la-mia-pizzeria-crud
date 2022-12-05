@@ -1,6 +1,7 @@
 package org.generation.italy.pizza.demo.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.generation.italy.pizza.demo.pojo.Pizza;
 import org.generation.italy.pizza.demo.service.PizzaService;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -66,6 +68,24 @@ public class PizzaController {
 			
 			pizzaService.save(pizza);
 			
+			return "redirect:/";
+		}
+		
+		//CREATE PIZZA
+		@GetMapping("/pizza/edit/{id}")
+		public String editPizza(@PathVariable("id") int id, Model model) {
+					
+			Optional<Pizza> optPizza = pizzaService.findPizzaByID(id);
+			Pizza pizza  = optPizza.get();
+			model.addAttribute("pizza", pizza);
+			
+			return "pizzaCRUD/update";
+		}
+		@PostMapping("/pizza/store")
+		public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
+					
+			pizzaService.save(pizza);
+					
 			return "redirect:/";
 		}
 }

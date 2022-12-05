@@ -28,7 +28,9 @@
 				  <tbody>
 				    <tr th:each=" pizza : ${allPizzas}" th:object="${pizza}" th:if="${allPizzas.size() > 0}">
 				      <th scope="row" th:text="*{id}"></th>
-				      <td th:text="*{name}"></td>
+				      <td>
+				      	<a th:text="*{name}" th:href="@{/pizza/edit/{id} (id=*{id})}"></a>
+				      </td>
 				      <td th:text="*{description}"></td>
 				      <td th:text="*{price}"></td>
 				      <td>
