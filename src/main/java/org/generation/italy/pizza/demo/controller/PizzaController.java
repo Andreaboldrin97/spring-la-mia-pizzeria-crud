@@ -74,7 +74,7 @@ public class PizzaController {
 			pizzaService.save(pizza);
 			
 			//a quale view ritorna
-			return "redirect:/";
+			return "redirect:/allPizzas";
 		}
 		
 		//CREATE PIZZA
@@ -96,7 +96,7 @@ public class PizzaController {
 			pizzaService.save(pizza);
 			
 			//a quale view ritorna
-			return "redirect:/";
+			return "redirect:/allPizzas";
 		}
 		
 		//DELETE PIZZA 
@@ -111,6 +111,6 @@ public class PizzaController {
 			pizzaService.delete(pizza);
 			
 			//a quale view ritorna
-			return "redirect:/";
+			return "redirect:/allPizzas";
 		}
 }
