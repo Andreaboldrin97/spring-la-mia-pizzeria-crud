@@ -8,9 +8,11 @@ import org.generation.italy.pizza.demo.service.DrinkService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -45,8 +47,23 @@ public class DrinkController {
 		//a quale view fa riferimento
 		return "drinkCRUD/create";
 	}
-	@PostMapping("/drink/create")
-	public String storeDrink(@Valid Drink drink) {
+	@PostMapping("/drink/create")              
+	public String storeDrink(@Valid Drink drink,
+								//Intergaccia per la registrazione degli errori 
+								BindingResult bindingResult, 
+								//Interfaccia secondaria di Model per passare attributi
+								RedirectAttributes redirectAttributes) {
+		
+		//veriafichiamo la presenza di errori nella compilazione dei campi del form
+		//hasErrors() ci ritorna un valore booleano sulla presenza o no di errori
+		if(bindingResult.hasErrors()) {
+			
+			//riportiamo gli errori all'interno della view indicata
+			redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+			
+			//ritorniamo al form con gli errori se i dati sono errati
+			return "redirect:/drink/create";
+		}
 		
 		//metodo per salvare un record
 		drinkService.save(drink);
@@ -68,7 +85,23 @@ public class DrinkController {
 		return "drinkCRUD/update";
 	}
 	@PostMapping("/drink/store")
-	public String updateDrink(@Valid Drink drink) {
+	public String updateDrink(@Valid Drink drink,
+			//Intergaccia per la registrazione degli errori 
+			BindingResult bindingResult, 
+			//Interfaccia secondaria di Model per passare attributi
+			RedirectAttributes redirectAttributes) {
+
+		//veriafichiamo la presenza di errori nella compilazione dei campi del form
+		//hasErrors() ci ritorna un valore booleano sulla presenza o no di errori
+		if(bindingResult.hasErrors()) {
+		
+		//riportiamo gli errori all'interno della view indicata
+		redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+		
+		//ritorniamo al form con gli errori se i dati sono errati
+		return "redirect:/drink/store";
+		}
+
 		
 		//metodo per salvare un record
 		drinkService.save(drink);

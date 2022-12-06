@@ -10,6 +10,13 @@
 		<header th:insert="frag :: header-nav"></header>
 		
 		<main>
+			<!-- visuallizazzione di errori -->
+			<div class="container border mt-5 p-3 text-danger" th:if="${errors}" >
+				<div th:each="error : ${errors}" th:object="${error}">
+					<p th:text="*{defaultMessage}"></p>
+				</div>
+			</div>
+			<!-- form per la compilazione dei record -->
 			<form class="container border mt-5 p-3" method="POST" action="/pizza/store" th:object="${pizza}"  >
 				<input type="text" name="id" th:field="*{id}" class="d-none" >
 				<div th:insert="frag :: form-crud"></div>

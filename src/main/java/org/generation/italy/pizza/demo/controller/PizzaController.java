@@ -8,11 +8,13 @@ import org.generation.italy.pizza.demo.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import jakarta.validation.Valid;
 
@@ -68,7 +70,23 @@ public class PizzaController {
 			return "pizzaCRUD/create";
 		}
 		@PostMapping("/pizza/create")
-		public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
+		public String storePizza(@Valid @ModelAttribute("pizza") Pizza pizza,
+				//Intergaccia per la registrazione degli errori 
+				BindingResult bindingResult, 
+				//Interfaccia secondaria di Model per passare attributi
+				RedirectAttributes redirectAttributes) {
+
+			//veriafichiamo la presenza di errori nella compilazione dei campi del form
+			//hasErrors() ci ritorna un valore booleano sulla presenza o no di errori
+			if(bindingResult.hasErrors()) {
+			
+			//riportiamo gli errori all'interno della view indicata
+			redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+			
+			//ritorniamo al form con gli errori se i dati sono errati
+			return "redirect:/pizza/create";
+			
+			}
 			
 			//metodo per salvare un record
 			pizzaService.save(pizza);
@@ -91,7 +109,23 @@ public class PizzaController {
 			return "pizzaCRUD/update";
 		}
 		@PostMapping("/pizza/store")
-		public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza) {
+		public String updatePizza(@Valid @ModelAttribute("pizza") Pizza pizza,
+				//Intergaccia per la registrazione degli errori 
+				BindingResult bindingResult, 
+				//Interfaccia secondaria di Model per passare attributi
+				RedirectAttributes redirectAttributes) {
+
+			//veriafichiamo la presenza di errori nella compilazione dei campi del form
+			//hasErrors() ci ritorna un valore booleano sulla presenza o no di errori
+			if(bindingResult.hasErrors()) {
+			
+			//riportiamo gli errori all'interno della view indicata
+			redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
+			
+			//ritorniamo al form con gli errori se i dati sono errati
+			return "redirect:/pizza/store";
+			
+			}
 			//metodo per salvare un record
 			pizzaService.save(pizza);
 			
