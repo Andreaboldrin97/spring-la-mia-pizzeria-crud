@@ -16,6 +16,9 @@
 					<p th:text="*{defaultMessage}"></p>
 				</div>
 			</div>
+			<div class="container border mt-5 p-3 text-danger" th:if="${uniqueException}">
+					[[${uniqueException}]]
+			</div>
 			<!-- form per la compilazione dei record -->
 			<form class="container border mt-5 p-3" method="POST" action="/drink/create" th:object="${drink}" th:insert="frag :: form-crud-drink">
 				

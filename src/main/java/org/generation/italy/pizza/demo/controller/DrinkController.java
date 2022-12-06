@@ -65,8 +65,16 @@ public class DrinkController {
 			return "redirect:/drink/create";
 		}
 		
-		//metodo per salvare un record
-		drinkService.save(drink);
+		try {
+			//metodo per salvare un record
+			drinkService.save(drink);
+		//prima di salvare controllo la presenza dei duplicati
+		}catch(Exception e) {
+			
+			//porto l'errore del duplicato in console
+			redirectAttributes.addFlashAttribute("uniqueException", e.getMessage() );
+			return "redirect:/drink/create";
+		}
 		
 		//a quale view ritorna
 		return "redirect:/drink";
@@ -102,9 +110,16 @@ public class DrinkController {
 		return "redirect:/drink/store";
 		}
 
-		
-		//metodo per salvare un record
-		drinkService.save(drink);
+		try {
+			//metodo per salvare un record
+			drinkService.save(drink);
+		//prima di salvare controllo la presenza dei duplicati
+		}catch(Exception e) {
+			
+			//porto l'errore del duplicato in console
+			redirectAttributes.addFlashAttribute("uniqueException", e.getMessage() );
+			return "redirect:/drinks/store";
+		}
 		
 		//a quale view ritorna
 		return "redirect:/drink";
