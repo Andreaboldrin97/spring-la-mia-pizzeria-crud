@@ -67,4 +67,28 @@ public class DrinkController {
 		
 		return "drinkCRUD/update";
 	}
+	@PostMapping("/drink/store")
+	public String updateDrink(@Valid Drink drink) {
+		
+		//metodo per salvare un record
+		drinkService.save(drink);
+		
+		//a quale view ritorna
+		return "redirect:/drink";
+	}
+	
+	//metodo per la delete
+	@GetMapping("/drink/delete/{id}")
+	public String deleteDrink(@PathVariable("id") int id, Model model) {
+		// selezioniamo il record con quell'id
+		Optional<Drink> optDrink= drinkService.findDrinkById(id);
+		Drink drink = optDrink.get();
+		
+		//metodo per salvare un record
+		drinkService.delete(drink);
+		
+		//a quale view ritorna
+		return "redirect:/drink";
+		
+	}
 }
