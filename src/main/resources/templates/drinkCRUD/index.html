@@ -21,25 +21,25 @@
 				      <th scope="col">DESCRIPTION</th>
 				      <th scope="col">PRICE</th>
 				      <th scope="col">
-				      	<a class="btn btn-primary" th:href="@{/pizza/create}">Create Pizza</a>
+				      	<a class="btn btn-primary" th:href="@{/drink/create}">Create Drink</a>
 				      </th>
 				    </tr>
 				  </thead>
 				  <tbody>
-				    <tr th:each=" pizza : ${allPizzas}" th:object="${pizza}" th:if="${allPizzas.size() > 0}">
+				    <tr th:each=" drink : ${drinks}" th:object="${drink}" th:if="${drinks.size() > 0}">
 				      <th scope="row" th:text="*{id}"></th>
 				      <td th:text="*{name}"></td>
 				      <td th:text="*{description}"></td>
 				      <td th:text="*{price}"></td>
 				      <td>
-				      	<a class="btn btn-primary" th:href="@{/pizza/edit/{id} (id=*{id})}">Edit</a>
-					  	<a class="btn btn-danger" th:href="@{/pizza/delete/{id} (id=*{id})}" >Delete</a>
+				      	<a class="btn btn-primary" th:href="@{/drink/edit/{id} (id=*{id})}">Edit</a>
+					  	<a class="btn btn-danger" th:href="@{/drink/delete/{id} (id=*{id})}" >Delete</a>
 					  </td>
 				    </tr>
 				  </tbody>
 				</table>
 			</div>
-			<h1 class="text-center"  th:unless="${allPizzas.size() > 0}"> NON sono presenti pizze</h1>
+			<h1 class="text-center"  th:unless="${drinks.size() > 0}"> NON sono presenti drink</h1>
 			
 		</main>
 		
