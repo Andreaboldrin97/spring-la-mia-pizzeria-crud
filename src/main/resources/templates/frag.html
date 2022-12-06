@@ -33,7 +33,7 @@
 			</nav>
 		</header>
 		
-		<!-- FORM CRUD FRAGMENT -->
+		<!-- FORM PIZZA CRUD FRAGMENT -->
 		<th:block th:fragment="form-crud">
 			<div class="mb-3">
 				<label class="form-label">Nome pizza</label>
@@ -45,6 +45,24 @@
 			</div>
 			<div class="mb-3">
 				<label class="form-label">Prezzo pizza</label>
+				<input class="form-control" type="number" name="price" th:field="*{price}">
+			</div>
+			
+			<input type="submit" value="save" class="btn btn-success">
+		</th:block>
+		
+		<!-- FORM DRINK CRUD FRAGMENT -->
+		<th:block th:fragment="form-crud-drink">
+			<div class="mb-3">
+				<label class="form-label">Nome Drink</label>
+				<input class="form-control" type="text" name="name" th:field="*{name}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Descrizione Drink</label>
+				<input class="form-control" type="text" name="description" th:field="*{description}">
+			</div>
+			<div class="mb-3">
+				<label class="form-label">Prezzo Drink</label>
 				<input class="form-control" type="number" name="price" th:field="*{price}">
 			</div>
 			

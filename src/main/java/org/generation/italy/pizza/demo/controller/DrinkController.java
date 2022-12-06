@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import jakarta.validation.Valid;
 
 //indichiamo che questa classe ci servirà da controller dei drink
 @Controller
@@ -27,5 +30,26 @@ public class DrinkController {
 		model.addAttribute("drinks", drinks);
 		
 		return "drinkCRUD/index";
+	}
+	
+	//metodo per creare un record
+	@GetMapping("/drink/create")
+	public String createDrink(Model model) {
+		
+		//creiamo un istanza del record da creare 
+		Drink drink = new Drink();
+		//portiamo il record alla pagina in modo da indicare le collone che lo compongono
+		model.addAttribute("drink", drink);
+		//a quale view fa riferimento
+		return "drinkCRUD/create";
+	}
+	@PostMapping("/drink/create")
+	public String storeDrink(@Valid Drink drink) {
+		
+		//metodo per salvare un record
+		drinkService.save(drink);
+		
+		//a quale view ritorna
+		return "redirect:/drink";
 	}
 }
