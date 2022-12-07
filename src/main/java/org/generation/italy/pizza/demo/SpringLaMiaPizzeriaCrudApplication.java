@@ -1,6 +1,5 @@
 package org.generation.italy.pizza.demo;
 
-import java.util.List;
 
 import org.generation.italy.pizza.demo.pojo.Drink;
 import org.generation.italy.pizza.demo.pojo.Pizza;
@@ -30,10 +29,10 @@ public class SpringLaMiaPizzeriaCrudApplication implements CommandLineRunner{
 	@Override
 	public void run(String... args) throws Exception {
 		
-		Pizza p1 = new Pizza("pizza1", "my p1 desc\"", 1000);
+		Pizza p1 = new Pizza("pizza1", "my p1 desc", 1000);
 		Pizza p2 = new Pizza("pizza2", "my p2 desc", 2200);
 		Pizza p3 = new Pizza("pizza3", "my p3 desc", 400);
-		Pizza p4 = new Pizza("pizza4", "my p4 desc\"", 1200);
+		Pizza p4 = new Pizza("pizza4", "my p4 desc", 1200);
 	
 		pizzaServ.save(p1);
 		pizzaServ.save(p2);

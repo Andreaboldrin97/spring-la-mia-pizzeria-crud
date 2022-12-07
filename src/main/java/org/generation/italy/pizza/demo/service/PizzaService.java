@@ -3,6 +3,7 @@ package org.generation.italy.pizza.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.generation.italy.pizza.demo.pojo.Drink;
 import org.generation.italy.pizza.demo.pojo.Pizza;
 import org.generation.italy.pizza.demo.repo.PizzaRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,11 @@ public class PizzaService {
 	public void delete(Pizza pizza) {
 		//grazie all'interfaccia JpaRepository possiamo usare il method delete
 		pizzaRepo.delete(pizza);
+	}
+	
+	//funzione di ricerca by name
+	public List<Pizza> findByName(String name) {
+		//ritorniamo una lista di record
+		return pizzaRepo.findBynameContainingIgnoreCase(name);
 	}
 }

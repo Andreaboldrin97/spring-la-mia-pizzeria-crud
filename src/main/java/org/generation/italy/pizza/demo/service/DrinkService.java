@@ -41,4 +41,10 @@ public class DrinkService {
 		//grazie all'interfaccia JpaRepository possiamo usare il method delete
 		drinkRepo.delete(drink);
 	}
+	
+	//funzione di ricerca by name
+	public List<Drink> findByName(String name) {
+		//ritorniamo una lista di record
+		return drinkRepo.findBynameContainingIgnoreCase(name);
+	}
 }
