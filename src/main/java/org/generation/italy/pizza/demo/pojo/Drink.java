@@ -1,5 +1,7 @@
 package org.generation.italy.pizza.demo.pojo;
 
+import org.generation.italy.pizza.demo.pojo.inter.PriceableInterface;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import jakarta.validation.constraints.NotNull;
 //pojo
 @Entity
 @Table
-public class Drink {
+public class Drink implements PriceableInterface {
 
 	//variabili d'istanza che creerabnno le colonne
 	@Id
@@ -66,12 +68,23 @@ public class Drink {
 		this.description = description;
 	}
 
+	// interface method
+	
+	@Override
 	public Integer getPrice() {
+		// TODO Auto-generated method stub
 		return price;
 	}
+
+	@Override
 	public void setPrice(Integer price) {
+		// TODO Auto-generated method stub
 		this.price = price;
 	}
+
+	
+
+	
 	
 	
 	

@@ -1,5 +1,7 @@
 package org.generation.italy.pizza.demo.pojo;
 
+import org.generation.italy.pizza.demo.pojo.inter.PriceableInterface;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -14,7 +16,7 @@ import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
-public class Pizza {
+public class Pizza implements PriceableInterface {
 
 	//Indichiamo le colonne presenti nella tabella ( variabili d'istanza )
 	
@@ -70,12 +72,6 @@ public class Pizza {
 		this.description = description;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-	public void setPrice(int price) {
-		this.price = price;
-	};
 	
 	//toString
 	@Override
@@ -83,5 +79,19 @@ public class Pizza {
 
 		return "Pizza : " + getId() + "-" + getName() + "-" + getDescription() + "-" + getPrice();
 	}
+
+	// interface method
+	
+		@Override
+		public Integer getPrice() {
+			// TODO Auto-generated method stub
+			return price;
+		}
+
+		@Override
+		public void setPrice(Integer price) {
+			// TODO Auto-generated method stub
+			this.price = price;
+		}
 	
 }

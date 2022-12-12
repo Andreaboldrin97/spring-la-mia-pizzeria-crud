@@ -1,9 +1,11 @@
 package org.generation.italy.pizza.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.generation.italy.pizza.demo.pojo.Drink;
 import org.generation.italy.pizza.demo.pojo.Pizza;
+import org.generation.italy.pizza.demo.pojo.inter.PriceableInterface;
 import org.generation.italy.pizza.demo.service.DrinkService;
 import org.generation.italy.pizza.demo.service.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,23 +44,42 @@ public class MainController {
 	private DrinkService drinkService;
 	
 	//metodo per la ricerca by name
-		@GetMapping("/search")
-		public String findByName(Model model,
-									// @RequestParam per estrarre parametri di query, 
-									@RequestParam(name = "query", required=false) String query) {
+	@GetMapping("/search")
+	public String findByName(Model model,
+								// @RequestParam per estrarre parametri di query, 
+								@RequestParam(name = "query", required=false) String query) {
 			
-			System.err.println(query);
-			//utilizziamo un ternario per verificare la presenza di una query
-			List<Drink> drinks = query == null ? drinkService.findAll() : drinkService.findByName(query);
-			//portiamo i record alla pagina
-			model.addAttribute("drinks", drinks);
-			model.addAttribute("query", query);
+		System.err.println(query);
+		//utilizziamo un ternario per verificare la presenza di una query
+		List<Drink> drinks = query == null ? drinkService.findAll() : drinkService.findByName(query);
+		//portiamo i record alla pagina
+		model.addAttribute("drinks", drinks);
+		model.addAttribute("query", query);
 			
-			//assegnamo ad un lista i record del db
-			List<Pizza> allPizzas = query == null ? pizzaService.findAll() : pizzaService.findByName(query);
-			//portiamo i record alla pagina
-			model.addAttribute("allPizzas", allPizzas);
+		//assegnamo ad un lista i record del db
+		List<Pizza> allPizzas = query == null ? pizzaService.findAll() : pizzaService.findByName(query);
+		//portiamo i record alla pagina
+		model.addAttribute("allPizzas", allPizzas);
 			
-			return "searching";
-		}
+		return "searching";
+	}
+	
+	// all index product
+	@GetMapping("/allProduct")
+	public String getAllProduct(Model model) {
+		
+		List<PriceableInterface> allProduct = new ArrayList<>();
+		
+		allProduct.addAll(pizzaService.findAll());
+		allProduct.addAll(drinkService.findAll());
+		
+		// ordinamento by lambda
+		allProduct.sort((e1, e2) -> e1.getPrice() - e2.getPrice());
+		
+		//portiamo i record alla pagina
+		model.addAttribute("allProduct", allProduct);
+		
+		return "product";
+	}
+	
 }
